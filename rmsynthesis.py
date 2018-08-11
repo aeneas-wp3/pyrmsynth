@@ -42,6 +42,7 @@ import numpy
 import pyfits
 import pylab
 from pywcs import WCS
+import mmap
 
 import rm_tools as R
 
@@ -329,7 +330,6 @@ def rmsynthesis(params, options, manual=False):
     else:
         nsb = len(fns)
 
-    print nsb,nchan
     cube = create_memmap_file_and_array(incube_mmfn,
        (nsb * nchan, decsz[1] - decsz[0], rasz[1] - rasz[0]),
        numpy.dtype('complex128'))
@@ -1001,9 +1001,7 @@ def create_memmap_file_and_array(fn, SHAPE, DTYPE):
         f.seek(npix * DTYPE.itemsize - 1)
         f.write('\x00')
 
-    print DTYPE
-    print SHAPE
-    m = numpy.memmap(fn, dtype=DTYPE, shape=SHAPE)
+    m = numpy.memmap(fn, dtype=DTYPE, shape=SHAPE, flags=mmap.MAP_PRIVATE)
 
     return m
 

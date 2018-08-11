@@ -1001,7 +1001,7 @@ def create_memmap_file_and_array(fn, SHAPE, DTYPE):
         f.seek(npix * DTYPE.itemsize - 1)
         f.write('\x00')
 
-    m = numpy.memmap(fn, dtype=DTYPE, shape=SHAPE, flags=mmap.MAP_PRIVATE)
+    m = numpy.memmap(fn, dtype=DTYPE, shape=SHAPE)
 
     return m
 

@@ -42,9 +42,9 @@ import numpy
 import pyfits
 import pylab
 from pywcs import WCS
-import mmap
 
 import rm_tools as R
+import memmap2 as mmap2
 
 VERSION = '1.3.0'
 
@@ -1001,7 +1001,8 @@ def create_memmap_file_and_array(fn, SHAPE, DTYPE):
         f.seek(npix * DTYPE.itemsize - 1)
         f.write('\x00')
 
-    m = numpy.memmap(fn, dtype=DTYPE, shape=SHAPE)
+    #m = numpy.memmap(fn, dtype=DTYPE, shape=SHAPE)
+    m = mmap2.memmap(fn, dtype=DTYPE, shape=SHAPE)
 
     return m
 

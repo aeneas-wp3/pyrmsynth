@@ -329,6 +329,7 @@ def rmsynthesis(params, options, manual=False):
     else:
         nsb = len(fns)
 
+    print nsb,nchan
     cube = create_memmap_file_and_array(incube_mmfn,
        (nsb * nchan, decsz[1] - decsz[0], rasz[1] - rasz[0]),
        numpy.dtype('complex128'))

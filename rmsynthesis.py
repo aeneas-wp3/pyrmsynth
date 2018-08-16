@@ -690,7 +690,7 @@ def rmsynthesis(params, options, manual=False):
     #        (decsz[1]-decsz[0], rasz[1]-rasz[0]), numpy.dtype('float64'))
     #print "umap"
     #umap = create_memmap_file_and_array(umap_mmfn, \
-            (decsz[1]-decsz[0], rasz[1]-rasz[0]), numpy.dtype('float64'))
+    #        (decsz[1]-decsz[0], rasz[1]-rasz[0]), numpy.dtype('float64'))
     print 'Computing polarized intensity and Faraday depth maps'
     for indx in range(decsz[1]-decsz[0]):
         for jndx in range(rasz[1]-rasz[0]):

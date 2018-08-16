@@ -679,13 +679,17 @@ def rmsynthesis(params, options, manual=False):
 
         #write_cc_list(cclist, params.outputfn+"_cc.txt")
 
+    print "polint"
     polintmap = create_memmap_file_and_array(pmap_mmfn, \
             (decsz[1]-decsz[0], rasz[1]-rasz[0]), numpy.dtype('float64'))
-    phimap = create_memmap_file_and_array(phimap_mmfn, \
-            (decsz[1]-decsz[0], rasz[1]-rasz[0]), numpy.dtype('float64'))
-    qmap = create_memmap_file_and_array(qmap_mmfn, \
-            (decsz[1]-decsz[0], rasz[1]-rasz[0]), numpy.dtype('float64'))
-    umap = create_memmap_file_and_array(umap_mmfn, \
+    #print "phimap"
+    #phimap = create_memmap_file_and_array(phimap_mmfn, \
+    #        (decsz[1]-decsz[0], rasz[1]-rasz[0]), numpy.dtype('float64'))
+    #print "qmap"
+    #qmap = create_memmap_file_and_array(qmap_mmfn, \
+    #        (decsz[1]-decsz[0], rasz[1]-rasz[0]), numpy.dtype('float64'))
+    #print "umap"
+    #umap = create_memmap_file_and_array(umap_mmfn, \
             (decsz[1]-decsz[0], rasz[1]-rasz[0]), numpy.dtype('float64'))
     print 'Computing polarized intensity and Faraday depth maps'
     for indx in range(decsz[1]-decsz[0]):
@@ -701,25 +705,25 @@ def rmsynthesis(params, options, manual=False):
                 if numpy.amax(p_los) > params.threshold:
                     polintmap[indx, jndx] = numpy.amax(p_los)
                     indx_max_polint = numpy.argmax(p_los)
-                    phimap[indx, jndx] = params.phi[indx_max_polint]
-                    qmap[indx, jndx] = q_los[indx_max_polint]
-                    umap[indx, jndx] = u_los[indx_max_polint]
+                    #phimap[indx, jndx] = params.phi[indx_max_polint]
+                    #qmap[indx, jndx] = q_los[indx_max_polint]
+                    #umap[indx, jndx] = u_los[indx_max_polint]
                 else:
                     polintmap[indx, jndx] = numpy.nan
-                    phimap[indx, jndx] = numpy.nan
-                    qmap[indx, jndx] = numpy.nan
-                    umap[indx, jndx] = numpy.nan
+                    #phimap[indx, jndx] = numpy.nan
+                    #qmap[indx, jndx] = numpy.nan
+                    #umap[indx, jndx] = numpy.nan
             else:
                 polintmap[indx, jndx] = numpy.nan
-                phimap[indx, jndx] = numpy.nan
-                qmap[indx, jndx] = numpy.nan
-                umap[indx, jndx] = numpy.nan
+                #phimap[indx, jndx] = numpy.nan
+                #qmap[indx, jndx] = numpy.nan
+                #umap[indx, jndx] = numpy.nan
     
     print 'Writing polarized intensity and Faraday depth maps'
     write_output_maps(polintmap, params, thead, 'polint')
-    write_output_maps(phimap, params, thead, 'phi', 'rad/m/m')
-    write_output_maps(qmap, params, thead, 'qmap')
-    write_output_maps(umap, params, thead, 'umap')
+    #write_output_maps(phimap, params, thead, 'phi', 'rad/m/m')
+    #write_output_maps(qmap, params, thead, 'qmap')
+    #write_output_maps(umap, params, thead, 'umap')
 
     print 'Cleaning up temp files...'
     del dicube
@@ -730,9 +734,9 @@ def rmsynthesis(params, options, manual=False):
     os.remove(incube_mmfn)
     os.remove(outcube_mmfn)
     os.remove(pmap_mmfn)
-    os.remove(phimap_mmfn)
-    os.remove(qmap_mmfn)
-    os.remove(umap_mmfn)
+    #os.remove(phimap_mmfn)
+    #os.remove(qmap_mmfn)
+    #os.remove(umap_mmfn)
     if params.do_clean:
         os.remove(cleancube_mmfn)
         os.remove(rescube_mmfn)

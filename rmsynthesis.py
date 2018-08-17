@@ -330,6 +330,7 @@ def rmsynthesis(params, options, manual=False):
     else:
         nsb = len(fns)
 
+    print nsb * nchan, decsz[1] - decsz[0], rasz[1] - rasz[0]
     cube = create_memmap_file_and_array(incube_mmfn,
        (nsb * nchan, decsz[1] - decsz[0], rasz[1] - rasz[0]),
        numpy.dtype('complex128'))
@@ -603,6 +604,7 @@ def rmsynthesis(params, options, manual=False):
         return rms, cube
 
     # dirty image
+    print len(params.phi), len(cube[0]), len(cube[0][0])
     dicube = create_memmap_file_and_array(outcube_mmfn,
         (len(params.phi), len(cube[0]), len(cube[0][0])),
         numpy.dtype('complex128'))
